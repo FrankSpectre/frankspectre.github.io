@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DISPOSE - Chargeback & Fraud Prevention</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'SF Pro Display', sans-serif;
+            background-color: #0A0A1E;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background: #1A1A40;
+            padding: 20px;
+        }
+        h1 {
+            color: #8B5CF6;
+        }
+        .hero {
+            padding: 50px 20px;
+            background: url('https://source.unsplash.com/1600x900/?cybersecurity,finance') no-repeat center center/cover;
+        }
+        .cta {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #8B5CF6;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        .benefits, .portfolio {
+            padding: 40px 20px;
+            background: #0F0F2D;
+        }
+        .reviews {
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: #111133;
+        }
+        .review {
+            background: #1A1A40;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 300px;
+            flex: 0 0 auto;
+        }
+        footer {
+            background: #1A1A40;
+            padding: 10px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #8B5CF6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DISPOSE</h1>
+        <p>Chargeback & Fraud Prevention Solutions</p>
+    </header>
+    
+    <section class="hero">
+        <h2>Your Personalized Chargeback & Fraud Strategy in 1 Day</h2>
+        <p>Expert fraud prevention, chargeback management, and sustainable KYC solutions for all businesses.</p>
+        <a href="https://calendly.com/frank-spectre7/30min" class="cta">Schedule a Consultation</a>
+    </section>
+    
+    <section class="benefits">
+        <h2>Why Choose DISPOSE?</h2>
+        <ul>
+            <li>✅ 1-day setup for a personalized strategy</li>
+            <li>✅ 24/7 Support</li>
+            <li>✅ Personal specialist assigned to you</li>
+            <li>✅ Pay-per-result pricing</li>
+            <li>✅ Unlimited free consultations</li>
+            <li>✅ Strategy designed by our CEO & lead specialist</li>
+        </ul>
+    </section>
+    
+    <section class="portfolio">
+        <h2>What Our Clients Say</h2>
+        <p>See our success stories from real businesses:</p>
+        <div class="reviews">
+            <div class="review">⭐️⭐️⭐️⭐️⭐️ "Frank was exceptional in resolving a complex dispute through clear data interpretation and deep understanding! Highly recommend!" - Samuelecheddar, France</div>
+            <div class="review">⭐️⭐️⭐️⭐️⭐️ "Frank does great work. He goes into the details and gets the job done. Won a couple of disputes with his help!" - Mihalopan, Slovenia</div>
+            <div class="review">⭐️⭐️⭐️⭐️⭐️ "Fast and good help with chargebacks, knows what is needed." - Ewoutm, Denmark</div>
+            <div class="review">⭐️⭐️⭐️⭐️⭐️ "This is the second project we do with Frank, and we are very satisfied with the results!" - Dicasivacations, Mexico</div>
+            <div class="review">⭐️⭐️⭐️⭐️⭐️ "Frank is exceptional and the highest caliber consultant for dispute management. Well done!" - Bowtiedcocoon, Canada</div>
+        </div>
+        <a href="https://www.fiverr.com/tanoul/" target="_blank" class="cta">View Our Portfolio</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 DISPOSE | <a href="mailto:contact@dispose.cc">contact@dispose.cc</a></p>
+    </footer>
+    
+    <script>
+        gsap.from(".hero h2", {opacity: 0, y: -50, duration: 1});
+        gsap.from(".benefits", {opacity: 0, y: 50, duration: 1, delay: 0.5});
+    </script>
+    
+    <script>
+        window.onload = function() {
+            Calendly.initBadgeWidget({ url: 'https://calendly.com/frank-spectre7', text: 'Schedule time with me', color: '#0069ff', textColor: '#ffffff', branding: true });
+        }
+    </script>
+</body>
+</html>
