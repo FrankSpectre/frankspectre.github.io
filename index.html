@@ -66,7 +66,7 @@
         }
 
         .logo img {
-            height: 90px; /* Increased logo size */
+            height: 90px;
             margin-right: 10px;
         }
 
@@ -323,9 +323,10 @@
         }
 
         .client-logo {
-            height: 50px;
+            height: 60px;
             margin-bottom: 1.5rem;
             object-fit: contain;
+            max-width: 100%;
         }
 
         .client-card h3 {
@@ -550,7 +551,7 @@
             }
 
             .logo img {
-                height: 70px; /* Adjusted for mobile */
+                height: 70px;
             }
 
             .hero h1 {
@@ -569,6 +570,70 @@
             .client-card,
             .testimonial-card {
                 min-width: 260px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .contact-link {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .calendly-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .client-card,
+            .testimonial-card {
+                min-width: 240px;
+            }
+
+            .contact-links {
+                gap: 1rem;
+            }
+
+            .contact-link {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -654,94 +719,72 @@
         <div class="section-title">
             <h2 class="animate">Trusted Across Diverse Industries.</h2> 
             <h2 class="animate">Tailored for YOUR Business.</h2>
-            <p class="animate delay-1">We don’t just fight fraud — we develop industry-leading defense strategies tailored to your business needs. Backed by years of hands-on experience, in-depth research, and insights from our partners and customers across diverse industries, our approach turns risk into opportunity in every major global market.</p>
+            <p class="animate delay-1">We don't just fight fraud — we develop industry-leading defense strategies tailored to your business needs. Backed by years of hands-on experience, in-depth research, and insights from our partners and customers across diverse industries, our approach turns risk into opportunity in every major global market.</p>
         </div>
         <div class="clients-container">
             <div class="clients-scroll">
                 <a href="https://regalmaison.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <h3>Regal Maison</h3>
-                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
+    <h3>Regal Maison</h3>
+    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+</a>
                 </a>
                 <a href="https://www.firebirdtours.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-plane"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/wwkiwp4jxp1jlmfkegw0o/Firebirdtours-logo.png?rlkey=xqzj6qwk4ki9sa8c7soulm4h6&st=ynud3xvq&dl=1" alt="Firebird Tours" class="client-logo">
                     <h3>Firebird Tours</h3>
                     <p>Premium travel company offering bespoke tours across Europe and Asia</p>
                 </a>
                 <a href="https://rail.ninja/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-train"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/850wsdhau6p6q294vgt09/Rail.Ninja-logo.png?rlkey=6jw1v9e7s896zr0mtrllecu8q&st=enq66f41&dl=1" alt="Rail.Ninja" class="client-logo">
                     <h3>Rail.Ninja</h3>
                     <p>#3 Global train ticket retailer with operations in 45+ countries</p>
                 </a>
                 <a href="https://highspeedtrains.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-subway"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/61h0i6i0vhpil3n2v8suu/highspeedtrains-logo.png?rlkey=luuapnoweg0p1qne8fg86cnnh&st=5ht2noyk&dl=1" alt="High Speed Trains" class="client-logo">
                     <h3>High Speed Trains</h3>
                     <p>Major provider of high-speed rail tickets across Europe</p>
                 </a>
                 <a href="https://lemalaya.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/elk1dj6bm6wrhadederfu/Lemalaya-Logo.png?rlkey=i168guq53isirkql8axwceubj&st=lb1rsiyo&dl=1" alt="Lemalaya" class="client-logo">
                     <h3>Lemalaya</h3>
                     <p>Fashion brand with Shopify store serving global customers</p>
                 </a>
                 <a href="https://ateliervivienne.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-vest"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/opplobe5fizfmbnl57rx8/Atelier-Vivienne-Logo.png?rlkey=izei9uu3b2b2pi24pyyr77uou&st=6q4o3og3&dl=1" alt="Atelier Vivienne" class="client-logo">
                     <h3>Atelier Vivienne</h3>
                     <p>Fashion E-commerce brand</p>
                 </a>
                 <a href="https://www.directautopartsonline.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-car"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/wpenbatn9oroo9o9592gw/Direct-Auto-Parts-Logo.png?rlkey=9y40r5q2y52t2t85va8us4nfl&st=w4tno1m0&dl=1" alt="Direct Auto Parts" class="client-logo">
                     <h3>Direct Auto Parts</h3>
                     <p>Online retailer specializing in automotive parts and accessories</p>
                 </a>
                 <a href="https://ticketgotourism.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-ticket-alt"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/3yez6aozb2clag9zc31yi/TicketGO-logo.png?rlkey=s6nlbvxiyhsq4krb6jm03mz57&st=9x443ycz&dl=1" alt="TicketGO Tourism" class="client-logo">
                     <h3>TicketGO Tourism</h3>
                     <p>Leading tourist attraction ticket retailer in the EU</p>
                 </a>
                 <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/z53tr6w286xmo881m10xu/Kuvera-Logo.png?rlkey=lm1afa5my6zht12zpsdu1cima&st=yn8lz83j&dl=1" alt="Kuvera Jewellery" class="client-logo">
                     <h3>Kuvera Jewellery</h3>
                     <p>Custom jewelry store with high-value, low-volume transaction model</p>
                 </a>
                 <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/i2fk2lxkfrw5t3gdq0wsk/Massagetools-logo.png?rlkey=6c8u1em4yt1epvzxt8x85yp15&st=a5hd60zp&dl=1" alt="MassageTools" class="client-logo">
                     <h3>MassageTools</h3>
                     <p>US online store of medical equipment</p>
                 </a>
                 <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
+                    <img src="https://www.dropbox.com/scl/fi/rk04cpr0uu8cedyq7auxm/Vibn-Logo.png?rlkey=30albf3zffgjspog25mk0yj2x&st=2fm3z7rb&dl=1" alt="Vibn Vintage" class="client-logo">
                     <h3>Vibn Vintage</h3>
                     <p>Niche Canadian vintage clothign brand</p>
                 </a>
                 <!-- Duplicate for seamless looping -->
-                <a href="https://regalmaison.com/" class="client-card" target="_blank">
-                    <div class="feature-icon">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <h3>Regal Maison</h3>
-                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+               <a href="https://regalmaison.com/" class="client-card" target="_blank">
+    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
+    <h3>Regal Maison</h3>
+    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+</a>
                 </a>
             </div>
         </div>
@@ -828,7 +871,7 @@
                 <i class="fas fa-envelope"></i>
                 Email Us
             </a>
-            <a href="https://calendly.com/frank-spectre7/30min" class="contact-link animate delay-3" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">
+              <a href="https://calendly.com/frank-spectre7/30min" class="contact-link animate delay-3" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">
                 <i class="fas fa-calendar-alt"></i>
                 Schedule Call
             </a>
