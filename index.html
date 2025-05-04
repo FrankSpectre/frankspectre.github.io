@@ -19,6 +19,22 @@
             --neon-pink: #ff00ff;
             --neon-green: #00ff99;
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            
+            /* Dark mode variables */
+            --bg-color: #ffffff;
+            --text-color: #0a0a1e;
+            --card-bg: #f5f5f5;
+            --header-bg: rgba(255, 255, 255, 0.98);
+        }
+
+        /* Dark mode colors */
+        .dark-mode {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.98);
+            --dark: #ffffff;
+            --light: #121212;
         }
 
         * {
@@ -34,10 +50,11 @@
         }
 
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Header */
@@ -46,41 +63,50 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.98);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--text-color);
             text-decoration: none;
             display: flex;
             align-items: center;
         }
 
         .logo img {
-            height: 90px;
+            height: 70px;
             margin-right: 10px;
+            transition: filter 0.3s ease;
+        }
+
+        .dark-mode .logo img {
+            filter: brightness(0) invert(1);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-links a {
-            color: var(--dark);
+            color: var(--text-color);
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
             position: relative;
+            font-size: 1rem;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -100,6 +126,21 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.4rem;
+            cursor: pointer;
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
         }
 
         .cta-button {
@@ -153,6 +194,10 @@
             z-index: -1;
         }
 
+        .dark-mode .hero::after {
+            background: rgba(18, 18, 18, 0.7);
+        }
+
         .hero-content {
             max-width: 600px;
             position: relative;
@@ -164,7 +209,7 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .hero h1 span.chargeback {
@@ -181,7 +226,8 @@
 
         .hero p {
             font-size: 1.2rem;
-            color: #444;
+            color: var(--text-color);
+            opacity: 0.8;
             margin-bottom: 2.5rem;
             font-weight: 400;
         }
@@ -209,7 +255,7 @@
         /* Features Section */
         .features {
             padding: 6rem 5%;
-            background: white;
+            background: var(--bg-color);
         }
 
         .section-title {
@@ -220,11 +266,12 @@
         .section-title h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .section-title p {
-            color: #555;
+            color: var(--text-color);
+            opacity: 0.7;
             max-width: 700px;
             margin: 0 auto;
             font-weight: 400;
@@ -239,12 +286,16 @@
         }
 
         .feature-card {
-            background: #f5f5f5;
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: var(--transition);
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .feature-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .feature-card:hover {
@@ -268,18 +319,19 @@
         .feature-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .feature-card p {
-            color: #555;
+            color: var(--text-color);
+            opacity: 0.7;
             font-weight: 400;
         }
 
         /* Clients Section */
         .clients {
             padding: 6rem 5%;
-            background: #f9f9ff;
+            background: var(--card-bg);
             overflow: hidden;
         }
 
@@ -305,16 +357,20 @@
 
         /* Client Card */
         .client-card {
-            background: #f5f5f5;
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: var(--transition);
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             width: 300px;
             flex: 0 0 auto;
             text-decoration: none;
-            color: var(--dark);
+            color: var(--text-color);
+        }
+
+        .dark-mode .client-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .client-card:hover {
@@ -327,6 +383,7 @@
             margin-bottom: 1.5rem;
             object-fit: contain;
             max-width: 100%;
+            -webkit-user-drag: none;
         }
 
         .client-card h3 {
@@ -336,14 +393,15 @@
         }
 
         .client-card p {
-            color: #555;
+            color: var(--text-color);
+            opacity: 0.7;
             font-weight: 400;
         }
 
         /* Testimonials Section */
         .testimonials {
             padding: 6rem 5%;
-            background: white;
+            background: var(--bg-color);
             overflow: hidden;
         }
 
@@ -356,15 +414,19 @@
         }
 
         .testimonial-card {
-            background: #f5f5f5;
+            background: var(--card-bg);
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             width: 350px;
             flex: 0 0 auto;
             transition: var(--transition);
             position: relative;
+        }
+
+        .dark-mode .testimonial-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .testimonial-card:hover {
@@ -387,7 +449,8 @@
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
-            color: #555;
+            color: var(--text-color);
+            opacity: 0.8;
             font-weight: 400;
         }
 
@@ -398,11 +461,12 @@
 
         .author-info h4 {
             margin-bottom: 0.2rem;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .author-info p {
-            color: #666;
+            color: var(--text-color);
+            opacity: 0.6;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
@@ -551,7 +615,7 @@
             }
 
             .logo img {
-                height: 70px;
+                height: 60px;
             }
 
             .hero h1 {
@@ -593,11 +657,12 @@
             }
 
             .logo img {
-                height: 60px;
+                height: 50px;
             }
 
             .hero h1 {
                 font-size: 1.8rem;
+                line-height: 1.3;
             }
 
             .hero p {
@@ -606,6 +671,7 @@
 
             .section-title h2 {
                 font-size: 1.6rem;
+                line-height: 1.3;
             }
 
             .feature-card {
@@ -625,6 +691,12 @@
             .client-card,
             .testimonial-card {
                 min-width: 240px;
+                padding: 1.5rem;
+            }
+
+            .client-logo {
+                height: 50px;
+                margin-bottom: 1rem;
             }
 
             .contact-links {
@@ -635,6 +707,26 @@
                 padding: 0.7rem 1.2rem;
                 font-size: 0.85rem;
             }
+
+            /* Force image loading in Safari */
+            .client-logo {
+                content: "";
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            /* Specific client logos for Safari */
+            .client-card[href*="regalmaison"] .client-logo {
+                background-image: url('https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1');
+            }
+            .client-card[href*="firebirdtours"] .client-logo {
+                background-image: url('https://www.dropbox.com/scl/fi/wwkiwp4jxp1jlmfkegw0o/Firebirdtours-logo.png?rlkey=xqzj6qwk4ki9sa8c7soulm4h6&st=ynud3xvq&dl=1');
+            }
+            .client-card[href*="rail.ninja"] .client-logo {
+                background-image: url('https://www.dropbox.com/scl/fi/850wsdhau6p6q294vgt09/Rail.Ninja-logo.png?rlkey=6jw1v9e7s896zr0mtrllecu8q&st=enq66f41&dl=1');
+            }
+            /* Add similar rules for other client logos */
         }
     </style>
 </head>
@@ -649,8 +741,9 @@
             <a href="#clients">Clients</a>
             <a href="#testimonials">Testimonials</a>
             <a href="#contact">Contact</a>
+    
         </nav>
-        <a href="#" class="cta-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">Get Started</a>
+        <a href="#" class="cta-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">Calendly</a>
     </header>
 
     <section class="hero">
@@ -724,10 +817,9 @@
         <div class="clients-container">
             <div class="clients-scroll">
                 <a href="https://regalmaison.com/" class="client-card" target="_blank">
-    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
-    <h3>Regal Maison</h3>
-    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
-</a>
+                    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
+                    <h3>Regal Maison</h3>
+                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
                 </a>
                 <a href="https://www.firebirdtours.com/" class="client-card" target="_blank">
                     <img src="https://www.dropbox.com/scl/fi/wwkiwp4jxp1jlmfkegw0o/Firebirdtours-logo.png?rlkey=xqzj6qwk4ki9sa8c7soulm4h6&st=ynud3xvq&dl=1" alt="Firebird Tours" class="client-logo">
@@ -780,11 +872,10 @@
                     <p>Niche Canadian vintage clothign brand</p>
                 </a>
                 <!-- Duplicate for seamless looping -->
-               <a href="https://regalmaison.com/" class="client-card" target="_blank">
-    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
-    <h3>Regal Maison</h3>
-    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
-</a>
+                <a href="https://regalmaison.com/" class="client-card" target="_blank">
+                    <img src="https://www.dropbox.com/scl/fi/ebx52fx4w1q3i44fm2n9r/Regal-Maison-Logo11.png?rlkey=58b8fy2tzgkrm4uh014nqr6mm&st=k987oomj&dl=1" alt="Regal Maison" class="client-logo">
+                    <h3>Regal Maison</h3>
+                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
                 </a>
             </div>
         </div>
@@ -801,7 +892,7 @@
                     <div class="testimonial-content">
                         <p>"...EXCEEDED my expectations in every way possible! His professionalism in data interpretation and presentation is outstanding, and his proactive communication ensured a smooth collaboration. Frank truly went ABOVE AND BEYOND with his deep understanding, making him an asset to my business."</p>
                     </div>
-                    <div class="testimonial-author">
+                    <div class="testimnial-author">
                         <div class="author-info">
                             <h4>Tamac M.</h4>
                             <p>Acquisition Corp (EU)</p>
