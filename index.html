@@ -1,126 +1,938 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DISPOSE - Chargeback & Fraud Prevention</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <title>DISPOSE - Chargeback Management & Fraud Prevention</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap');
-        
-        body {
-            font-family: 'SF Pro Display', sans-serif;
-            background-color: #0A0A1E;
-            color: #FFFFFF;
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #8c7ae6;
+            --secondary: #00cec9;
+            --dark: #0a0a1e;
+            --light: #ffffff;
+            --accent: #a55eea;
+            --neon-blue: #00f2fe;
+            --neon-purple: #8a2be2;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff99;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 90px; /* Increased logo size */
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(106, 92, 231, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(106, 92, 231, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('https://www.dropbox.com/scl/fi/997h8vbhcgmo7q543idab/background-1.jpg?rlkey=ifkdy3myog9bsmgteyza7004e&st=qy7qsrrx&dl=1') no-repeat center center/cover;
+            z-index: -1;
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+
+        .hero h1 span.chargeback {
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span.fraud {
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .secondary-button {
+            padding: 0.8rem 1.8rem;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .secondary-button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid #e0e0e0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #555;
+            font-weight: 400;
+        }
+
+        /* Clients Section */
+        .clients {
+            padding: 6rem 5%;
+            background: #f9f9ff;
+            overflow: hidden;
+        }
+
+        .clients-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 2rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .clients-scroll {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            padding: 1rem;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Client Card */
+        .client-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid #e0e0e0;
+            width: 300px;
+            flex: 0 0 auto;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .client-logo {
+            height: 50px;
+            margin-bottom: 1.5rem;
+            object-fit: contain;
+        }
+
+        .client-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .client-card p {
+            color: #555;
+            font-weight: 400;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 5%;
+            background: white;
+            overflow: hidden;
+        }
+
+        .testimonials-scroll {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            padding: 1rem;
+            animation: scroll 40s linear infinite;
+        }
+
+        .testimonial-card {
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            width: 350px;
+            flex: 0 0 auto;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(108, 92, 231, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Fiverr Button */
+        .fiverr-badge {
+            display: inline-block;
+            background: #1DBF73;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .fiverr-badge:hover {
+            background: #19a966;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 5%;
+            background: var(--dark);
+            color: white;
             text-align: center;
         }
-        header {
-            background: #1A1A40;
-            padding: 20px;
-        }
-        h1 {
-            color: #8B5CF6;
-        }
-        .hero {
-            padding: 50px 20px;
-            background: url('https://source.unsplash.com/1600x900/?cybersecurity,finance') no-repeat center center/cover;
-        }
-        .cta {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #8B5CF6;
-            color: #FFFFFF;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: 600;
-        }
-        .benefits, .portfolio {
-            padding: 40px 20px;
-            background: #0F0F2D;
-        }
-        .reviews {
-            overflow-x: auto;
-            white-space: nowrap;
+
+        .contact-links {
             display: flex;
-            gap: 20px;
-            padding: 20px;
-            background: #111133;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 3rem auto;
+            max-width: 800px;
         }
-        .review {
-            background: #1A1A40;
-            padding: 20px;
-            border-radius: 10px;
-            min-width: 300px;
-            flex: 0 0 auto;
-        }
-        footer {
-            background: #1A1A40;
-            padding: 10px;
-            font-size: 14px;
-        }
-        footer a {
-            color: #8B5CF6;
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: white;
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Calendly Floating Button */
+        .calendly-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .calendly-button {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .calendly-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .calendly-button i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero::before, .hero::after {
+                width: 100%;
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            
+            .hero::after {
+                opacity: 0.7;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .client-card,
+            .testimonial-card {
+                min-width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .logo img {
+                height: 70px; /* Adjusted for mobile */
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .client-card,
+            .testimonial-card {
+                min-width: 260px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>DISPOSE</h1>
-        <p>Chargeback & Fraud Prevention Solutions</p>
+        <a href="#" class="logo">
+            <img src="https://www.dropbox.com/scl/fi/ssdlg1ism2k4qnwqgnhqc/dispose2.png?rlkey=uv3bqnpoyswyzaxemt3xgfka1&st=bowxy5g4&dl=1" alt="DISPOSE">
+        </a>
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#clients">Clients</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a href="#" class="cta-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">Get Started</a>
     </header>
-    
+
     <section class="hero">
-        <h2>Your Personalized Chargeback & Fraud Strategy in 1 Day</h2>
-        <p>Expert fraud prevention, chargeback management, and sustainable KYC solutions for all businesses.</p>
-        <a href="https://calendly.com/frank-spectre7/30min" class="cta">Schedule a Consultation</a>
-    </section>
-    
-    <section class="benefits">
-        <h2>Why Choose DISPOSE?</h2>
-        <ul>
-            <li>✅ 1-day setup for a personalized strategy</li>
-            <li>✅ 24/7 Support</li>
-            <li>✅ Personal specialist assigned to you</li>
-            <li>✅ Pay-per-result pricing</li>
-            <li>✅ Unlimited free consultations</li>
-            <li>✅ Strategy designed by our CEO & lead specialist</li>
-        </ul>
-    </section>
-    
-    <section class="portfolio">
-        <h2>What Our Clients Say</h2>
-        <p>See our success stories from real businesses:</p>
-        <div class="reviews">
-            <div class="review"> "Frank was exceptional in resolving a complex dispute through clear data interpretation and deep understanding! Highly recommend!" - Samuelecheddar, France</div>
-            <div class="review"> "Frank does great work. He goes into the details and gets the job done. Won a couple of disputes with his help!" - Mihalopan, Slovenia</div>
-            <div class="review"> "Fast and good help with chargebacks, knows what is needed." - Ewoutm, Denmark</div>
-            <div class="review"> "This is the second project we do with Frank, and we are very satisfied with the results!" - Dicasivacations, Mexico</div>
-            <div class="review"> "Frank is exceptional and the highest caliber consultant for dispute management. Well done!" - Bowtiedcocoon, Canada</div>
+        <div class="hero-content">
+            <h1 class="animate">Advanced <span class="chargeback">Chargeback Management</span> & <span class="fraud">Fraud Prevention</span></h1>
+            <p class="animate delay-1">Our team will help your business to protect revenue, prevent chargeback and fraud losses and maximise the security and efficiency of payments. Schedule a consultation to sign up for a free trial.</p>
+            <div class="hero-buttons">
+                <a href="#" class="cta-button animate delay-2" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">Schedule Demo</a>
+                <a href="#features" class="secondary-button animate delay-3">Learn More</a>
+            </div>
         </div>
-        <a href="https://www.fiverr.com/tanoul/" target="_blank" class="cta">View Our Portfolio</a>
     </section>
-    
-    <footer>
-        <p>&copy; 2024 DISPOSE | <a href="mailto:contact@dispose.cc">contact@dispose.cc</a></p>
+
+    <section id="features" class="features">
+        <div class="section-title">
+            <h2 class="animate">Comprehensive Chargeback & Fraud Prevention Solutions</h2>
+            <p class="animate delay-1">Everything you need to protect your business from fraud and chargebacks</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Transaction Monitoring</h3>
+                <p>First layer of defense to ensure security of payments. Manual review by the specialist with the help 3rd party fraud prvention software to confirm transaction legitimacy. </p>
+            </div>
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>Chargeback Management and Prevention</h3>
+                <p>Professional response documentation will push chargeback success rate to the limit. Improvements to your website and operational workflows will ensure compliance with payment system regulations and significantly reduce dispute rates.</p>
+            </div>
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Data Analysis</h3>
+                <p>Based on existing and newly generated data we'll identify chargeback and fraud behaviour patterns and suggest adjustments to payment setup and business structure to further decrease revenue losses.</p>
+            </div>
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>KYC Verification</h3>
+                <p>Payer identity verification to ensure legitimate customers while blocking fraudsters. Helps to maximise conversion while maintaining stable paymentnt security</p>
+            </div>
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Payment and Software support</h3>
+                <p>We'll work on your behalf and manage onboarding of new payment providers, methods and third party fraud prevention tools to maximise the efficiency of your payment setup security and processing costs.</p>
+            </div>
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Dedicated Support and Full Transparency</h3>
+                <p>Every case, task, or review is carefully tracked, giving you full visibility into deliverable quality and case statuses. Have a question? Our team is here to help - schedule a free consultation anytime.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients" class="clients">
+        <div class="section-title">
+            <h2 class="animate">Trusted Across Diverse Industries.</h2> 
+            <h2 class="animate">Tailored for YOUR Business.</h2>
+            <p class="animate delay-1">We don’t just fight fraud — we develop industry-leading defense strategies tailored to your business needs. Backed by years of hands-on experience, in-depth research, and insights from our partners and customers across diverse industries, our approach turns risk into opportunity in every major global market.</p>
+        </div>
+        <div class="clients-container">
+            <div class="clients-scroll">
+                <a href="https://regalmaison.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Regal Maison</h3>
+                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+                </a>
+                <a href="https://www.firebirdtours.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Firebird Tours</h3>
+                    <p>Premium travel company offering bespoke tours across Europe and Asia</p>
+                </a>
+                <a href="https://rail.ninja/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Rail.Ninja</h3>
+                    <p>#3 Global train ticket retailer with operations in 45+ countries</p>
+                </a>
+                <a href="https://highspeedtrains.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-subway"></i>
+                    </div>
+                    <h3>High Speed Trains</h3>
+                    <p>Major provider of high-speed rail tickets across Europe</p>
+                </a>
+                <a href="https://lemalaya.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Lemalaya</h3>
+                    <p>Fashion brand with Shopify store serving global customers</p>
+                </a>
+                <a href="https://ateliervivienne.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-vest"></i>
+                    </div>
+                    <h3>Atelier Vivienne</h3>
+                    <p>Fashion E-commerce brand</p>
+                </a>
+                <a href="https://www.directautopartsonline.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Direct Auto Parts</h3>
+                    <p>Online retailer specializing in automotive parts and accessories</p>
+                </a>
+                <a href="https://ticketgotourism.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3>TicketGO Tourism</h3>
+                    <p>Leading tourist attraction ticket retailer in the EU</p>
+                </a>
+                <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Kuvera Jewellery</h3>
+                    <p>Custom jewelry store with high-value, low-volume transaction model</p>
+                </a>
+                <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>MassageTools</h3>
+                    <p>US online store of medical equipment</p>
+                </a>
+                <a href="https://kuverajewelry.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Vibn Vintage</h3>
+                    <p>Niche Canadian vintage clothign brand</p>
+                </a>
+                <!-- Duplicate for seamless looping -->
+                <a href="https://regalmaison.com/" class="client-card" target="_blank">
+                    <div class="feature-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Regal Maison</h3>
+                    <p>Luxury home decor and furnishings Shopify store with global customer base</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="section-title">
+            <h2 class="animate">Kind Words of Our Customers</h2>
+            <p class="animate delay-1">Hear from businesses who've entrusted Chargeback Management anf Fraud Defense to us</p>
+        </div>
+        <div class="clients-container">
+            <div class="testimonials-scroll">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"...EXCEEDED my expectations in every way possible! His professionalism in data interpretation and presentation is outstanding, and his proactive communication ensured a smooth collaboration. Frank truly went ABOVE AND BEYOND with his deep understanding, making him an asset to my business."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Tamac M.</h4>
+                            <p>Acquisition Corp (EU)</p>
+                            <a href="https://www.fiverr.com/tanoul?public_mode=true" class="fiverr-badge" target="_blank">View on Fiverr</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"...Delivered excellent results on our chargeback disputes, showing undestanding of dispute process. The team was proactive and communicated effectively. Thorough approach in crafting dispute responses and ability to meet tight deadlines were especially valuable. Highly recommended for expertise and commitment."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Samuel C.</h4>
+                            <p>SkinLife (FR)</p>
+                            <a href="https://www.fiverr.com/tanoul?public_mode=true" class="fiverr-badge" target="_blank">View on Fiverr</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"...Excelled in business consulting with exceptional attention to detail and professionalism that EXCEEDED my expectations. Proactive communication and quick responsiveness made collaboration a breeze, and the project was delivered on time. Working with Frank was an absolute joy!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Steven P.</h4>
+                            <p>Juice Guru Institute (US)</p>
+                            <a href="https://www.fiverr.com/tanoul?public_mode=true" class="fiverr-badge" target="_blank">View on Fiverr</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"...Provided a full in depth analysis of what it takes to win different types of chargebacks as well as assisted in helping me further my own skills in completing chargebacks myself going forward by providing information and templates! I highly recommend this service to anyone who needs chargeback and dispute help!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Camren M.</h4>
+                            <p>(US)</p>
+                            <a href="https://www.fiverr.com/tanoul?public_mode=true" class="fiverr-badge" target="_blank">View on Fiverr</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate for seamless looping -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"...EXCEEDED my expectations in every way possible! His professionalism in data interpretation and presentation is outstanding, and his proactive communication ensured a smooth collaboration. Frank truly went ABOVE AND BEYOND with his deep understanding, making him an asset to my business."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Tamac M.</h4>
+                            <p>Acquisition Corp (EU)</p>
+                            <a href="https://www.fiverr.com/tanoul?public_mode=true" class="fiverr-badge" target="_blank">View on Fiverr</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 class="animate">Get In Touch</h2>
+        <p class="animate delay-1">Contact us to learn how we can help protect your business</p>
+        
+        <div class="contact-links">
+            <a href="mailto:frank.spectre7@gmail.com" class="contact-link animate delay-2">
+                <i class="fas fa-envelope"></i>
+                Email Us
+            </a>
+            <a href="https://calendly.com/frank-spectre7/30min" class="contact-link animate delay-3" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">
+                <i class="fas fa-calendar-alt"></i>
+                Schedule Call
+            </a>
+            <a href="https://t.me/yourchannel" class="contact-link animate delay-2">
+                <i class="fab fa-telegram"></i>
+                Telegram
+            </a>
+            <a href="https://wa.me/yournumber" class="contact-link animate delay-3">
+                <i class="fab fa-whatsapp"></i>
+                WhatsApp
+            </a>
+            <a href="https://www.fiverr.com/tanoul" class="contact-link animate delay-4">
+                <i class="fab fa-fonticons-fi"></i>
+                Fiverr
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2023 DISPOSE. All rights reserved.</p>
+        <p>Chargeback Management & Fraud Prevention Solutions</p>
     </footer>
-    
+
+    <!-- Calendly Floating Button -->
+    <div class="calendly-popup">
+        <a href="#" class="calendly-button" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/frank-spectre7/30min'});return false;">
+            <i class="far fa-calendar-alt"></i>
+            <span>Schedule Call</span>
+        </a>
+    </div>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script>
-        gsap.from(".hero h2", {opacity: 0, y: -50, duration: 1});
-        gsap.from(".benefits", {opacity: 0, y: 50, duration: 1, delay: 0.5});
-    </script>
-    
-    <script>
-        window.onload = function() {
-            Calendly.initBadgeWidget({ url: 'https://calendly.com/frank-spectre7', text: 'Schedule time with me', color: '#0069ff', textColor: '#ffffff', branding: true });
+        // Simple animation trigger on scroll
+        const animateElements = () => {
+            const elements = document.querySelectorAll('.animate');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Improved infinite scroll with manual control
+        function setupInfiniteScroll() {
+            const clientsScroll = document.querySelector('.clients-scroll');
+            const testimonialsScroll = document.querySelector('.testimonials-scroll');
+            
+            // Clone content for seamless looping
+            if(clientsScroll) {
+                clientsScroll.innerHTML += clientsScroll.innerHTML;
+            }
+            if(testimonialsScroll) {
+                testimonialsScroll.innerHTML += testimonialsScroll.innerHTML;
+            }
+            
+            // Pause on hover and allow manual scrolling
+            [clientsScroll, testimonialsScroll].forEach(scrollElement => {
+                if(scrollElement) {
+                    scrollElement.addEventListener('mouseenter', () => {
+                        scrollElement.style.animationPlayState = 'paused';
+                    });
+                    scrollElement.addEventListener('mouseleave', () => {
+                        scrollElement.style.animationPlayState = 'running';
+                    });
+                    
+                    // Allow manual scrolling
+                    scrollElement.addEventListener('scroll', () => {
+                        // Reset scroll position when reaching the middle (where the duplicate starts)
+                        if(scrollElement.scrollLeft >= scrollElement.scrollWidth / 2) {
+                            scrollElement.scrollLeft -= scrollElement.scrollWidth / 2;
+                        }
+                    });
+                }
+            });
         }
+
+        window.addEventListener('scroll', animateElements);
+        document.addEventListener('DOMContentLoaded', () => {
+            animateElements();
+            setupInfiniteScroll();
+        });
     </script>
 </body>
 </html>
