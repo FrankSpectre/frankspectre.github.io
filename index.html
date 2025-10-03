@@ -727,9 +727,25 @@
                 background-image: url('https://www.dropbox.com/scl/fi/850wsdhau6p6q294vgt09/Rail.Ninja-logo.png?rlkey=6jw1v9e7s896zr0mtrllecu8q&st=enq66f41&dl=1');
             }
             
-            /* Justify all section text */
-            p, .feature-card p, .client-card p, .testimonial-content, .section-title p, .hero p, .contact-section p {
-                text-align: justify;
+            /* Force all body text to justify */
+body p,
+.feature-card p,
+.client-card p,
+.testimonial-content p,
+.section-title p,
+.hero p,
+.contact-section p {
+    text-align: justify !important;
+}
+
+/* Optional: justify headings too */
+.section-title h2,
+.hero h1,
+.feature-card h3,
+.client-card h3 {
+    text-align: justify !important;
+    text-align-last: center; /* keeps last line centered if only one line */
+}
             }
         }
     </style>
